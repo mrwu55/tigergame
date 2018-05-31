@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="white">#ffffff</color>
+    <color name="black">#000000</color>
+    <color name="dark">#cccccc</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="colorblack00">#00000000</color>
+    <color name="colorffe11d">#ffe11d</color>
+    <color name="f2eb34">#FFFF01</color>
+    <color name="colorc8">#FA00FE</color>
+    <color name="e6231d">#FA0000</color>
+    <color name="c83b8e9">#83bfe9</color>
+    <color name="c70bbb49">#01FF01</color>
+    <color name="c55b332">#55b332</color>
+    <color name="ce9cadf">#e9cadf</color>
+    <color name="ced7425">#ed7425</color>
+    <color name="ffff47">#ffff47</color>
+    <color name="record">#A54CAA</color>
+    <color name="record_yellow">#FFFF01</color>
+    <color name="p_double">#FE0100</color>
+    <color name="getscore">#CF00FD</color>
+    <color name="big">#FBB100</color>
+    <color name="small">#5DFE68</color>
+    <color name="EDED2B">#EDED2B</color>
+</resources>

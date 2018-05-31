@@ -1,0 +1,46 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="@android:style/Theme.Black.NoTitleBar.Fullscreen">
+        <!-- Customize your theme here. -->
+        <item name="android:typeface">serif</item>
+    </style>
+
+    <!-- 防止欢迎页白屏或者黑屏，设置图片 -->
+    <style name="SplashTheme"
+        parent="@android:style/Theme.Black.NoTitleBar.Fullscreen">
+    <item name="android:windowBackground">@mipmap/splash</item>
+</style>
+    <style name="ChooseHouse"
+        parent="Theme.AppCompat.NoActionBar">
+        <item name="android:windowBackground">@mipmap/splash</item>
+        <item name="android:typeface">serif</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:fastScrollTrackDrawable">@mipmap/seekbar_bg</item>
+        <item name="android:fastScrollThumbDrawable">@mipmap/seekbar_thub</item>
+    </style>
+    <declare-styleable name="VerticalSeekBar">
+        <attr name="vertical_color" format="color" />
+        <attr name="circle_radius" format="dimension" />
+        <attr name="circle_color" format="color" />
+        <attr name="dragable" format="boolean" />
+        <attr name="image_background" format="reference" />
+    </declare-styleable>
+    <declare-styleable name="TextviewColor">
+        <attr name="color" format="color" />
+    </declare-styleable>
+    <!--自定义dialog背景全透明无边框theme -->
+    <style name="MyDialog" parent="@android:style/Theme.Holo.Light.NoActionBar.Fullscreen">
+        <!--背景颜色及和透明程度-->
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <!--是否去除标题 -->
+        <item name="android:windowNoTitle">true</item>
+        <!--是否去除边框-->
+        <item name="android:windowFrame">@null</item>
+        <!--是否浮现在activity之上-->
+        <item name="android:windowIsFloating">true</item>
+        <!--是否模糊-->
+        <item name="android:backgroundDimEnabled">true</item>
+    </style>
+</resources>

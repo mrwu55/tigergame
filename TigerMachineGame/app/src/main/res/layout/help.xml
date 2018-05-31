@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:id="@+id/re_home_help"
+    android:layout_height="match_parent">
+    <TextView
+        android:layout_width="400dp"
+        android:layout_centerInParent="true"
+        android:background="@mipmap/home_tips_bg"
+        android:text="帮助中心"
+        android:textColor="@color/white"
+        android:textSize="15dp"
+        android:gravity="center"
+        android:layout_height="230dp" />
+    <RelativeLayout
+        android:layout_width="430dp"
+        android:layout_centerInParent="true"
+        android:layout_height="260dp">
+        <ImageView
+            android:id="@+id/img_help_close"
+            android:layout_alignParentRight="true"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:background="@mipmap/regist_close_bg"/>
+    </RelativeLayout>
+
+</RelativeLayout>

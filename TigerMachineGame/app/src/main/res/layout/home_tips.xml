@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:id="@+id/re_home_tips"
+    android:layout_height="match_parent">
+        <TextView
+            android:id="@+id/tv_tipdialog_tip"
+            android:layout_width="250dp"
+            android:layout_centerInParent="true"
+            android:background="@mipmap/home_tips_bg"
+            android:text="请仔细阅读游戏规则并勾选"
+            android:textColor="@color/white"
+            android:textSize="15dp"
+            android:gravity="center"
+            android:layout_height="120dp" />
+    <RelativeLayout
+        android:layout_width="280dp"
+        android:layout_centerInParent="true"
+        android:layout_height="150dp">
+        <ImageView
+            android:id="@+id/img_tips_close"
+            android:layout_alignParentRight="true"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:background="@mipmap/regist_close_bg"/>
+    </RelativeLayout>
+
+    </RelativeLayout>

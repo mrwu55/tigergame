@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+     android:layout_width="match_parent"
+    android:id="@+id/re_dialog_exit"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:layout_width="260dp"
+        android:layout_height="140dp"
+        android:layout_centerInParent="true"
+        android:background="@mipmap/home_tips_bg"
+        >
+            <TextView
+                android:id="@+id/tv_join_title"
+                android:layout_width="wrap_content"
+                android:layout_height="106dp"
+                android:textSize="18dp"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:layout_centerHorizontal="true"
+                android:text="确定退出吗？"
+                />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="20dp"
+            android:orientation="horizontal">
+            <Button
+                android:id="@+id/btn_exit_sure"
+                android:layout_width="60dp"
+                android:layout_height="28dp"
+                android:background="@drawable/regidtsure_btn"/>
+            <Button
+                android:id="@+id/btn_exit_cancel"
+                android:layout_width="60dp"
+                android:layout_height="28dp"
+                android:layout_marginLeft="53dp"
+                android:background="@drawable/registcancel_bg"/>
+        </LinearLayout>
+    </RelativeLayout>
+</RelativeLayout>

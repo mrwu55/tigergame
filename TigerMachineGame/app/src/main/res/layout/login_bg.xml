@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/re_loading"
+   android:layout_width="match_parent"
+    android:layout_height="match_parent">
+        <TextView
+            android:background="@mipmap/loading_bg"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textSize="15dp"
+            android:text="正在加载，清稍后。。。"
+            android:layout_width="190dp"
+            android:layout_height="85dp"/>
+</RelativeLayout>
