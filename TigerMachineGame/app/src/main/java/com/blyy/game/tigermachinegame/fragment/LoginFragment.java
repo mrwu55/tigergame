@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.util.Log;
 import android.view.Display;
 import android.view.View;
 import android.view.Window;
@@ -24,7 +23,6 @@ import com.blyy.game.tigermachinegame.util.OkHttpUtils;
 import com.blyy.game.tigermachinegame.util.SharedPrefrenceUtil;
 import com.blyy.game.tigermachinegame.util.ToastUtil;
 import com.blyy.game.tigermachinegame.view.RegistDialog;
-import com.blyy.game.tigermachinegame.view.Test;
 
 import okhttp3.FormBody;
 
@@ -32,7 +30,6 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener 
     private RegistDialog registDialog;
     private EditText mEditCode,mEditName,mEditPss,mEditSurePss;
     private EditText mEditLoginName,mEditLoginPss;
-    private EditText mEditUrl ;
     private SharedPrefrenceUtil sharedPrefrenceUtil;
     private  String name,pss;
     private Button mBtnLogin,mBtnRegist;
@@ -85,7 +82,6 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener 
         mEditLoginName = (EditText) view.findViewById(R.id.edit_login_name);
         mEditLoginPss = (EditText) view.findViewById(R.id.edit_login_pss);
         mImgExit = view.findViewById(R.id.img_main_exit);
-        mEditUrl = (EditText) view.findViewById(R.id.edit_url);
         mBtnLogin = view.findViewById(R.id.login_btn);
         mBtnRegist = view.findViewById(R.id.regist_btn);
         mBtnLogin.setOnClickListener(this);
@@ -153,11 +149,6 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener 
                     ToastUtil.toast(getActivity(),"用户密码不合法！");
                     return;
                 }
-                String url = mEditUrl.getText().toString();
-                if(!url.isEmpty()){
-                    Test.URL = "http://"+url+"/XprojectApp/";
-                }
-                Log.e(" Constans.URL", Constans.LOGIN);
                 OkHttpUtils.getData(getActivity(), Constans.LOGIN,
                         new FormBody.Builder().add("uName",uniCodeName).
                                 add("uPass",pss).build(), LoginBean.class,handler,0);
@@ -170,7 +161,6 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener 
                 break;
             case R.id.btn_regist_sure:
                 try {
-                    App.getApp().playBtn();
                     String code = mEditCode.getText().toString();
                     if(code.isEmpty()){
                         ToastUtil.toast(getActivity(),"邀请码不能为空！");
@@ -216,7 +206,6 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener 
                 registDialog.dismiss();
                 break;
             case R.id.btn_regist_cancel:
-                App.getApp().playBtn();
                 registDialog.dismiss();
                 break;
         }

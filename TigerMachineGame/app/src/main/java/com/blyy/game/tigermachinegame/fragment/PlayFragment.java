@@ -44,6 +44,7 @@ import com.blyy.game.tigermachinegame.util.PlayGameNetWorkUtil;
 import com.blyy.game.tigermachinegame.util.ToastUtil;
 import com.blyy.game.tigermachinegame.view.RegistDialog;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -113,6 +114,8 @@ public class PlayFragment extends BaseFragment implements
     private String bigTitle;
     private boolean isBig = false;
     private TextView mTvBbS;
+    private TextView mTvClearA,mTvClearB,mTvClearC;
+    private int clearAScore,clearBScore,clearCScore;
     @SuppressLint("HandlerLeak")
     private Handler handler = new Handler() {
         @Override
@@ -555,26 +558,23 @@ public class PlayFragment extends BaseFragment implements
                         }else {
                             mTvClearScore.setText("0");
                         }
-                        mTvCredit.setText(interval + "");
-                        if(mediaPlayer!=null&&mediaPlayer.isPlaying()){
-                            mediaPlayer.stop();
-                            mediaPlayer.prepare();
-                            mediaPlayer.seekTo(0);
-                        }
-                        handler.postDelayed(new Runnable() {
-                            @Override
-                            public void run() {
-                                //重新开始游戏
-                                initStartGame();
-                            }
-                        },1000);
+                            getResetScore();
                         break;
-                    case 20://中大奖
+                    case 20:
                         mTvClearScore.setText("0");
-                         ArrayList<TextView> list = (ArrayList<TextView>) msg.obj;
-                        mTvClearScore = list.get(list.size()-1-clearPosition);
-                        clearScore = Integer.parseInt(mTvClearScore.getText().toString());
-                        clearPosition++;
+                        mTvClearA.setText("0");
+                        mTvClearB.setText("0");
+                        if(mTvClearC!=null){
+                            mTvClearC.setText("0");
+                        }
+                        getResetScore();
+                        break;
+                    case 21://中大奖加分
+                        mTvClearScore.setText(clearScore<=0?"0":clearScore--+"");
+                        mTvClearA.setText(clearAScore<=0?"0":clearAScore--+"");
+                        mTvClearB.setText(clearBScore<=0?"0":clearBScore--+"");
+                        if(mTvClearC==null) return;
+                        mTvClearC.setText(clearCScore<=0?"0":clearCScore--+"");
                         break;
                     case 617://网络错误
                         int typeCode = msg.arg1;
@@ -642,7 +642,7 @@ public class PlayFragment extends BaseFragment implements
                 soundOpen = soundPool.load(getContext(), R.raw.open_brand, 1);
                 soundSmallBig = soundPool.load(getContext(), R.raw.small_big, 1);
                 soundBsSuccess = soundPool.load(getContext(), R.raw.success, 1);
-                soundBsGetAll = soundPool.load(getContext(), R.raw.getall, 1);
+                soundBsGetAll = soundPool.load(getContext(), R.raw.addall, 1);
                 soundDo = soundPool.load(getContext(), R.raw.dos, 1);
                 soundRe = soundPool.load(getContext(), R.raw.re, 1);
                 soundMi = soundPool.load(getContext(), R.raw.mi, 1);
@@ -1329,10 +1329,7 @@ public class PlayFragment extends BaseFragment implements
             }
         }).start();
     }
-    private int clearPosition =0;
-    private void getScoreBig(final ArrayList<TextView> list){
-        clearPosition = 0;
-        final int listSize = list.size();
+    private void getScoreBig(){
         final int scoreBefore = interval;
         new Thread(new Runnable() {
             @Override
@@ -1343,26 +1340,15 @@ public class PlayFragment extends BaseFragment implements
                         interval = scoreGet;
                         addScore = false;
                         //得分后初始化游戏
-                        handler.sendEmptyMessage(19);
+                        handler.sendEmptyMessage(20);
                         break;
-                    }
-                    if(clearScore<=0&&clearPosition<=listSize-1){
-                             Message message = new Message();
-                             message.what=20;
-                            message.obj =list;
-                            handler.sendMessage(message);
-                        try {
-                            Thread.sleep(20);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
                     }
                     try {
                         Thread.sleep(10);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
-                    handler.sendEmptyMessage(13);
+                    handler.sendEmptyMessage(21);
                 }
 
             }
@@ -1435,7 +1421,16 @@ public class PlayFragment extends BaseFragment implements
                 }
                 this.isBig = false;
                 clearScore = Integer.parseInt(mTvClearScore.getText().toString());
-                getScoreBig(listBig);
+                mTvClearA = listBig.get(0);
+                clearAScore = Integer.parseInt(mTvClearA.getText().toString());
+                mTvClearB = listBig.get(1);
+                clearBScore = Integer.parseInt(mTvClearB.getText().toString());
+                mTvClearC = null;
+                if(listBig.size()>2){
+                    mTvClearC =listBig.get(2);
+                    clearCScore = Integer.parseInt(mTvClearC.getText().toString());
+                }
+                getScoreBig();
             }else {
                 mTvClearScore = listBig.get(0);
                 clearScore = Integer.parseInt(mTvClearScore.getText().toString());
@@ -1443,7 +1438,25 @@ public class PlayFragment extends BaseFragment implements
                 getScore();
             }
     }
-
+    private void getResetScore(){
+        try {
+        mTvCredit.setText(interval + "");
+        if(mediaPlayer!=null&&mediaPlayer.isPlaying()){
+            mediaPlayer.stop();
+            mediaPlayer.prepare();
+            mediaPlayer.seekTo(0);
+        }
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                //重新开始游戏
+                initStartGame();
+            }
+        },1000);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
     @Override
     public boolean onBackPressed() {
         if(interval>0){

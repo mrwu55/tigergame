@@ -13,6 +13,7 @@
         android:id="@+id/re_fragmentac_tip"
         android:layout_width="match_parent"
         android:background="#89000000"
+        android:scrollbars="none"
         android:visibility="invisible"
         android:layout_height="wrap_content">
         <TextView

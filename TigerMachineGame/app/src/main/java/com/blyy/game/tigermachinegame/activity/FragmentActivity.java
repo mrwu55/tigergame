@@ -54,7 +54,7 @@ public class FragmentActivity extends android.support.v4.app.FragmentActivity
     private TextView mTvTips;
     private int width;
     private  Runnable task,sysTask;
-    private String tips ="哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈";
+    private String tips ="";
     private String lucky_tips ="";
     private long sysTipsTime=0;
     private boolean isFirst = true;
@@ -74,7 +74,7 @@ public class FragmentActivity extends android.support.v4.app.FragmentActivity
                 LuckyBean luckyBean = (LuckyBean) msg.obj;
                 if(luckyBean==null) return;
                     lucky_tips = "";
-//                    tips = "";
+                    tips = "";
                 int status = luckyBean.getStatus();
                 if(status==1){
                     List<LuckyBean.DataBean.MessageVosBean> messageVosBeans = luckyBean.getData().getMessageVos();

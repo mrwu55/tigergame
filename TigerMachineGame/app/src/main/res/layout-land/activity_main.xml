@@ -4,14 +4,6 @@
     android:layout_height="match_parent"
     android:background="@mipmap/login_bg"
     >
-    <EditText
-        android:id="@+id/edit_url"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:paddingLeft="30dp"
-        android:typeface="sans"
-        android:hint="输入网址如（211.149.249.102:8080）"
-        />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"

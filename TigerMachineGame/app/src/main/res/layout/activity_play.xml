@@ -206,7 +206,6 @@
      android:layout_alignParentBottom="true"
      android:layout_marginBottom="5dp"
      >
-
   <RelativeLayout
       android:layout_marginLeft="15dp"
       android:layout_width="match_parent"
@@ -217,52 +216,69 @@
        android:layout_width="match_parent"
        android:layout_height="match_parent"
        android:gravity="bottom|right"
+       android:layout_marginLeft="100dp"
        android:orientation="horizontal">
-    <Button
-        android:id="@+id/btn_a_keepmachine"
-        android:layout_width="wrap_content"
-        android:layout_height="38dp"
-        android:gravity="center_vertical"
-        android:background="@null"
-        android:text="留机"
-        android:drawablePadding="3dp"
-        android:textSize="18dp"
-        android:textColor="@color/ce9cadf"
-        android:drawableLeft="@drawable/play_btn_bg"
-        />
-   <LinearLayout
-       android:layout_marginLeft="15dp"
-       android:layout_width="wrap_content"
-       android:layout_height="70dp"
-       android:gravity="bottom"
-       android:orientation="vertical">
-     <TextView
-         android:id="@+id/tv_play_big"
-         android:layout_width="48dp"
-         android:gravity="center"
-         android:layout_height="30dp"
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:gravity="right|bottom"
+        android:layout_weight="1">
+
+     <Button
+         android:id="@+id/btn_a_keepmachine"
+         android:layout_width="wrap_content"
+         android:layout_height="38dp"
+         android:gravity="center_vertical"
+         android:background="@null"
+         android:text="留机"
+         android:drawablePadding="3dp"
          android:textSize="18dp"
-         android:visibility="invisible"
-         android:textColor="@color/f2eb34"
-         android:text="BIG"/>
-  <Button
-      android:id="@+id/btn_a_on"
-      android:layout_width="wrap_content"
-      android:layout_height="38dp"
-      android:gravity="center_vertical"
-      android:drawableLeft="@drawable/play_btn_bg"
-      android:textColor="@color/ce9cadf"
-      android:text="上分"
-      android:textSize="18dp"
-      android:drawablePadding="3dp"
-      android:background="@null"/>
-   </LinearLayout>
-    <LinearLayout
-        android:layout_marginLeft="15dp"
-        android:layout_width="wrap_content"
-        android:layout_height="70dp"
-        android:gravity="bottom"
-        android:orientation="vertical">
+         android:textColor="@color/ce9cadf"
+         android:drawableLeft="@drawable/play_btn_bg"
+         />
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:gravity="right|bottom"
+        android:layout_weight="1">
+     <LinearLayout
+         android:layout_width="wrap_content"
+         android:layout_height="70dp"
+         android:gravity="bottom"
+         android:orientation="vertical">
+      <TextView
+          android:id="@+id/tv_play_big"
+          android:layout_width="48dp"
+          android:gravity="center"
+          android:layout_height="30dp"
+          android:textSize="18dp"
+          android:visibility="invisible"
+          android:textColor="@color/f2eb34"
+          android:text="BIG"/>
+      <Button
+          android:id="@+id/btn_a_on"
+          android:layout_width="wrap_content"
+          android:layout_height="38dp"
+          android:gravity="center_vertical"
+          android:drawableLeft="@drawable/play_btn_bg"
+          android:textColor="@color/ce9cadf"
+          android:text="上分"
+          android:textSize="18dp"
+          android:drawablePadding="3dp"
+          android:background="@null"/>
+     </LinearLayout>
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:gravity="right|bottom"
+        android:layout_weight="1">
+     <LinearLayout
+         android:layout_width="wrap_content"
+         android:layout_height="70dp"
+         android:gravity="bottom"
+         android:orientation="vertical">
       <TextView
           android:id="@+id/tv_play_small"
           android:layout_width="match_parent"
@@ -284,31 +300,43 @@
           android:drawableLeft="@drawable/play_btn_bg"
           android:background="@null"/>
 
-    </LinearLayout>
-    <Button
-        android:layout_marginLeft="15dp"
-        android:id="@+id/btn_a_addbet"
-        android:layout_width="wrap_content"
-        android:layout_height="38dp"
-        android:textSize="18dp"
-        android:gravity="center_vertical"
-        android:textColor="@color/ce9cadf"
-        android:drawablePadding="3dp"
-        android:text="押分"
-        android:drawableLeft="@drawable/play_btn_bg"
-        android:background="@null"/>
-    <Button
-        android:layout_marginLeft="15dp"
-        android:id="@+id/btn_a_begain"
-        android:layout_width="wrap_content"
-        android:layout_height="38dp"
-        android:text="开始"
-        android:gravity="center_vertical"
-        android:textSize="18dp"
-        android:textColor="@color/ce9cadf"
-        android:drawablePadding="3dp"
-        android:drawableLeft="@drawable/play_btn_bg"
-        android:background="@null"/>
+     </LinearLayout>
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:gravity="right|bottom"
+        android:layout_weight="1">
+     <Button
+         android:id="@+id/btn_a_addbet"
+         android:layout_width="wrap_content"
+         android:layout_height="38dp"
+         android:textSize="18dp"
+         android:gravity="center_vertical"
+         android:textColor="@color/ce9cadf"
+         android:drawablePadding="3dp"
+         android:text="押分"
+         android:drawableLeft="@drawable/play_btn_bg"
+         android:background="@null"/>
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:gravity="right|bottom"
+        android:layout_weight="1">
+     <Button
+         android:id="@+id/btn_a_begain"
+         android:layout_width="wrap_content"
+         android:layout_height="38dp"
+         android:text="开始"
+         android:gravity="center_vertical"
+         android:textSize="18dp"
+         android:textColor="@color/ce9cadf"
+         android:drawablePadding="3dp"
+         android:drawableLeft="@drawable/play_btn_bg"
+         android:background="@null"/>
+    </RelativeLayout>
+
    </LinearLayout>
    <LinearLayout
        android:layout_alignParentBottom="true"
@@ -325,7 +353,7 @@
         />
     <TextView
         android:id="@+id/tv_a_machine_gold"
-        android:layout_width="100dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="12dp"
         android:layout_marginTop="2dp"
