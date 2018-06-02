@@ -68,6 +68,7 @@ public class ChooseSeatFragment extends BaseFragment implements
                     break;
                 case 1://点击座位
                     PlayBean playBean = (PlayBean) msg.obj;
+                    isClick = false;
                     if(playBean==null) return;
                     int erroCode = playBean.getStatus();
                     if(erroCode==1){
@@ -75,7 +76,6 @@ public class ChooseSeatFragment extends BaseFragment implements
                         bundle.putSerializable("playBean",playBean);
                         showFragment(bundle,3);
                     }else if(erroCode==2){//有留机
-                        isClick = false;
                         try {
                             String title = playBean.getData().getMessage();
                             gameStatus = playBean.getData().getGameStatus();
@@ -167,7 +167,6 @@ public class ChooseSeatFragment extends BaseFragment implements
     public void onHiddenChanged(boolean hidden) {
         super.onHiddenChanged(hidden);
         if(!hidden){
-            isClick = false;
             if(Constans.gold!=null){
                 mTvMoney.setText("当前余额："+Constans.gold);
             }

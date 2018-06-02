@@ -9,10 +9,10 @@ import android.util.Log;
 public class Constans {
 
     public static String  URL = "http://47.104.138.188:8080/XprojectApp/";
-    //测试地址
+//    测试地址
 //    public static  String URL = "http://211.149.249.102:8070/XprojectApp/";
     //本机
-//    public static String URL = "http://192.168.1.5:8080/XprojectApp/";
+//    public static String URL = "http://192.168.199.150:8080/XprojectApp/";
     //登录
     public static  String LOGIN = URL+"userLogin/login";
     //JSESSIONID
