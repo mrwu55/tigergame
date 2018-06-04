@@ -115,12 +115,16 @@ public class PlayAdapter extends BaseAdapter{
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder viewHolder = null;
         Context context = parent.getContext();
+        Log.e("getView",position+"");
         if (convertView == null) {
             convertView = LayoutInflater.from(context).inflate(R.layout.lay_play_lv_item, null);
             viewHolder = new ViewHolder(convertView);
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
+        }
+        if(position!=parent.getChildCount()){
+            return convertView;
         }
         PlayBean.DataBean.RateListBean rateListBean = data.get(data.size()-position-1);
         List<PlayBean.DataBean.RateListBean.RateVosBean> rateVosBeans = rateListBean.getRateVos();
@@ -148,7 +152,6 @@ public class PlayAdapter extends BaseAdapter{
         }
         if(!"".equals(holdTitle)){
             if(holdTitle.equals(viewHolder.mTvTitle.getText().toString())){
-                Log.e("adapterHold","走了");
                 mTvTilteHold = viewHolder.mTvTitle;
                 threadHold = new ThreadHold(mHandler);
                 new Thread(threadHold).start();
@@ -240,6 +243,7 @@ public class PlayAdapter extends BaseAdapter{
                 listBig.add(mTvRed);
             }
             if(position==9){
+                isClear = false;
                 onScoreClearListner.onScoreClearViews(listBig,isBig);
             }
         }

@@ -22,6 +22,7 @@
         <activity
             android:name=".activity.FragmentActivity"
             android:configChanges="screenSize|keyboardHidden|orientation"
+            android:windowSoftInputMode="stateUnchanged|adjustPan"
             android:screenOrientation="landscape"
             android:theme="@style/ChooseHouse">
             <intent-filter>
@@ -49,9 +50,6 @@
                 android:resource="@xml/provider_paths"
                 tools:replace="name,resource" />
         </provider>
-        <activity android:name=".activity.RecordActivity"
-            android:configChanges="screenSize|keyboardHidden|orientation"
-            android:screenOrientation="landscape"/>
     </application>
 
 </manifest>

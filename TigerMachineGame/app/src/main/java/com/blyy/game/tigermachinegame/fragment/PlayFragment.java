@@ -7,7 +7,6 @@ import android.media.SoundPool;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.util.Log;
 import android.view.Display;
 import android.view.MotionEvent;
 import android.view.View;
@@ -458,7 +457,6 @@ public class PlayFragment extends BaseFragment implements
                         mTvHold.setVisibility(View.INVISIBLE);
                         if(endBean.getStatus()==1){
                             scoreGet = endBean.getData().getBetRecord().getIntegral();
-                            Log.e("得分",scoreGet+"");
                             EndBean.DataBean.BetRecordBean.UsersVoBean.MachineVoBean machineVoBean = endBean.getData().getBetRecord().getUsersVo().getMachineVo();
                             String numA = machineVoBean.getTotalOf5k() + "";
                             String numB = machineVoBean.getTotalOfRs() + "";
@@ -553,6 +551,7 @@ public class PlayFragment extends BaseFragment implements
                         mTvTipBig.setTextColor(getResources().getColor(R.color.big));
                         break;
                     case 19://比倍得分
+                        soundPool.stop(getAllId);
                         if(isDouble){
                             clearScore(0);
                         }else {
@@ -1303,6 +1302,7 @@ public class PlayFragment extends BaseFragment implements
         }
         return false;
     }
+
     private void getScore(){
         final int scoreBefore = interval;
         new Thread(new Runnable() {
@@ -1311,7 +1311,6 @@ public class PlayFragment extends BaseFragment implements
                 while (addScore){
                     interval++;
                     if(interval>=scoreGet||(interval-scoreBefore)>=2000){
-                        soundPool.stop(getAllId);
                         interval = scoreGet;
                         addScore = false;
                         //得分后初始化游戏

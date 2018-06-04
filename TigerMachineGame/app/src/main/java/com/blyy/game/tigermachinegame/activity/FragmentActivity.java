@@ -31,6 +31,7 @@ import com.blyy.game.tigermachinegame.fragment.RecordFragment;
 import com.blyy.game.tigermachinegame.util.ChangeOrientationHandler;
 import com.blyy.game.tigermachinegame.util.OrientationSensorListener;
 import com.blyy.game.tigermachinegame.util.PlayGameNetWorkUtil;
+import com.blyy.game.tigermachinegame.view.AndroidBug5497Workaround;
 
 import java.util.List;
 
@@ -153,6 +154,7 @@ public class FragmentActivity extends android.support.v4.app.FragmentActivity
     }
     private void init() {
         setContentView(R.layout.activity_fragment);
+        AndroidBug5497Workaround.assistActivity(this);
         WindowManager wm = (WindowManager) this
                 .getSystemService(Context.WINDOW_SERVICE);
         width = wm.getDefaultDisplay().getWidth();
@@ -163,7 +165,7 @@ public class FragmentActivity extends android.support.v4.app.FragmentActivity
         if(loginFragment==null){
             loginFragment = new LoginFragment();
         }
-        transaction.add(R.id.fragment_base_frame, loginFragment).commit();
+        transaction.add(R.id.fragment_base_frame, loginFragment).commitAllowingStateLoss();
     }
     private void startAnim(String tips){
         mReTips.setVisibility(View.VISIBLE);
@@ -234,9 +236,8 @@ public class FragmentActivity extends android.support.v4.app.FragmentActivity
                 transaction.add(R.id.fragment_base_frame, recordFragment);
                 break;
         }
-        transaction.commit();
+        transaction.commitAllowingStateLoss();
     }
-
     /**
      * 返回键监听
      * @param position
@@ -262,7 +263,7 @@ public class FragmentActivity extends android.support.v4.app.FragmentActivity
                 playFragment = null;
                 chooseSeatFragment = null;
                 houseFragment = null;
-                transaction.show(loginFragment).commit();
+                transaction.show(loginFragment).commitAllowingStateLoss();
                 return;
             }
             if(playFragment!=null){
@@ -270,31 +271,31 @@ public class FragmentActivity extends android.support.v4.app.FragmentActivity
                 playFragment = null;
                 chooseSeatFragment = null;
                 houseFragment = null;
-                transaction.show(loginFragment).commit();
+                transaction.show(loginFragment).commitAllowingStateLoss();
                 return;
             }
             if(chooseSeatFragment!=null){
                 transaction.remove(chooseSeatFragment).remove(houseFragment);
                 chooseSeatFragment = null;
                 houseFragment = null;
-                transaction.show(loginFragment).commit();
+                transaction.show(loginFragment).commitAllowingStateLoss();
                 return;
             }
                 transaction.remove(houseFragment);
                 houseFragment = null;
-                transaction.show(loginFragment).commit();
+                transaction.show(loginFragment).commitAllowingStateLoss();
                 mHanlder.removeCallbacks(task);
             break;
         case 2:
-            transaction.remove(chooseSeatFragment).show(houseFragment).commit();
+            transaction.remove(chooseSeatFragment).show(houseFragment).commitAllowingStateLoss();
             chooseSeatFragment = null;
             break;
         case 3:
-            transaction.remove(playFragment).show(chooseSeatFragment).commit();
+            transaction.remove(playFragment).show(chooseSeatFragment).commitAllowingStateLoss();
             playFragment = null;
             break;
         case 4:
-            transaction.remove(recordFragment).show(playFragment).commit();
+            transaction.remove(recordFragment).show(playFragment).commitAllowingStateLoss();
             recordFragment = null;
             break;
           }
@@ -302,6 +303,7 @@ public class FragmentActivity extends android.support.v4.app.FragmentActivity
     @Override
     protected void onResume() {
         sm.registerListener(listener, sensor, SensorManager.SENSOR_DELAY_UI);
+        Log.e("onResume","onResume");
         super.onResume();
     }
     @Override
