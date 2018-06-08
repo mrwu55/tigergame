@@ -115,6 +115,8 @@ public class PlayFragment extends BaseFragment implements
     private TextView mTvBbS;
     private TextView mTvClearA,mTvClearB,mTvClearC;
     private int clearAScore,clearBScore,clearCScore;
+    private  EndBean.DataBean.BetRecordBean.UsersVoBean.MachineVoBean getScoreMachineBean;
+    private String bigScore;
     @SuppressLint("HandlerLeak")
     private Handler handler = new Handler() {
         @Override
@@ -457,15 +459,7 @@ public class PlayFragment extends BaseFragment implements
                         mTvHold.setVisibility(View.INVISIBLE);
                         if(endBean.getStatus()==1){
                             scoreGet = endBean.getData().getBetRecord().getIntegral();
-                            EndBean.DataBean.BetRecordBean.UsersVoBean.MachineVoBean machineVoBean = endBean.getData().getBetRecord().getUsersVo().getMachineVo();
-                            String numA = machineVoBean.getTotalOf5k() + "";
-                            String numB = machineVoBean.getTotalOfRs() + "";
-                            String numC = machineVoBean.getTotalOfSf() + "";
-                            String numD = machineVoBean.getTotalOf4k() + "";
-                            mTvNumA.setText(numA);
-                            mTvNumB.setText(numB);
-                            mTvNumC.setText(numC);
-                            mTvNumD.setText(numD);
+                            getScoreMachineBean = endBean.getData().getBetRecord().getUsersVo().getMachineVo();
                             addScore = true;
                             if(!isDouble){
                                 playAdapter.setIsClear(true);
@@ -551,7 +545,6 @@ public class PlayFragment extends BaseFragment implements
                         mTvTipBig.setTextColor(getResources().getColor(R.color.big));
                         break;
                     case 19://比倍得分
-                        soundPool.stop(getAllId);
                         if(isDouble){
                             clearScore(0);
                         }else {
@@ -560,7 +553,7 @@ public class PlayFragment extends BaseFragment implements
                             getResetScore();
                         break;
                     case 20:
-                        mTvClearScore.setText("0");
+                        mTvClearScore.setText(bigScore);
                         mTvClearA.setText("0");
                         mTvClearB.setText("0");
                         if(mTvClearC!=null){
@@ -1312,6 +1305,7 @@ public class PlayFragment extends BaseFragment implements
                     interval++;
                     if(interval>=scoreGet||(interval-scoreBefore)>=2000){
                         interval = scoreGet;
+                        soundPool.stop(getAllId);
                         addScore = false;
                         //得分后初始化游戏
                         handler.sendEmptyMessage(19);
@@ -1407,15 +1401,19 @@ public class PlayFragment extends BaseFragment implements
                 switch (bigTitle){
                     case "5.K":
                         mTvClearScore = mTvNumA;
+                        bigScore = getScoreMachineBean.getTotalOf5k();
                         break;
                     case "R.S":
                         mTvClearScore = mTvNumB;
+                        bigScore = getScoreMachineBean.getTotalOfRs();
                         break;
                     case "S.F":
                         mTvClearScore = mTvNumC;
+                        bigScore = getScoreMachineBean.getTotalOfSf();
                         break;
                     case "4.K":
                         mTvClearScore = mTvNumD;
+                        bigScore = getScoreMachineBean.getTotalOf4k();
                         break;
                 }
                 this.isBig = false;

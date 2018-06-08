@@ -204,10 +204,10 @@ public class EndBean {
                     private String rtName;
                     private String bili;
                     private int status;
-                    private int totalOf5k;
-                    private int totalOfRs;
-                    private int totalOfSf;
-                    private int totalOf4k;
+                    private String totalOf5k;
+                    private String totalOfRs;
+                    private String totalOfSf;
+                    private String totalOf4k;
                     private Object machineOfUserVo;
 
                     public int getMId() {
@@ -266,35 +266,35 @@ public class EndBean {
                         this.status = status;
                     }
 
-                    public int getTotalOf5k() {
+                    public String getTotalOf5k() {
                         return totalOf5k;
                     }
 
-                    public void setTotalOf5k(int totalOf5k) {
+                    public void setTotalOf5k(String totalOf5k) {
                         this.totalOf5k = totalOf5k;
                     }
 
-                    public int getTotalOfRs() {
+                    public String getTotalOfRs() {
                         return totalOfRs;
                     }
 
-                    public void setTotalOfRs(int totalOfRs) {
+                    public void setTotalOfRs(String totalOfRs) {
                         this.totalOfRs = totalOfRs;
                     }
 
-                    public int getTotalOfSf() {
+                    public String getTotalOfSf() {
                         return totalOfSf;
                     }
 
-                    public void setTotalOfSf(int totalOfSf) {
+                    public void setTotalOfSf(String totalOfSf) {
                         this.totalOfSf = totalOfSf;
                     }
 
-                    public int getTotalOf4k() {
+                    public String getTotalOf4k() {
                         return totalOf4k;
                     }
 
-                    public void setTotalOf4k(int totalOf4k) {
+                    public void setTotalOf4k(String totalOf4k) {
                         this.totalOf4k = totalOf4k;
                     }
 

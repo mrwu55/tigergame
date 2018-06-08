@@ -5,7 +5,6 @@ import android.content.Context;
 import android.graphics.Color;
 import android.os.Handler;
 import android.os.Message;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -115,7 +114,6 @@ public class PlayAdapter extends BaseAdapter{
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder viewHolder = null;
         Context context = parent.getContext();
-        Log.e("getView",position+"");
         if (convertView == null) {
             convertView = LayoutInflater.from(context).inflate(R.layout.lay_play_lv_item, null);
             viewHolder = new ViewHolder(convertView);

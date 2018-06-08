@@ -222,8 +222,4 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener 
         }
         return unicodeBytes;
     }
-    public interface OnLoginSuccess{
-        void onLoginSuccess(LoginBean loginBean);
-        void onExitApp();
-    }
 }
