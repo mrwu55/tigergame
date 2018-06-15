@@ -194,8 +194,9 @@ public class PlayFragment extends BaseFragment implements
                             }
                             mTvCredit.setText(interval-bets + "");
                             mTvMachineGold.setText("金币：" + gold);
+                            mBtnDown.setEnabled(true);
                         } else {
-                            String errorMessage = upScoreBean.getMsg() == null ? "下分失败！" : upScoreBean.getMsg();
+                            String errorMessage = upScoreBean.getMsg() == null ? "上分失败！" : upScoreBean.getMsg();
                             Toast.makeText(getContext(), errorMessage, Toast.LENGTH_SHORT).show();
                             if(status==3){
                                 setBackPosition(0);
@@ -254,6 +255,8 @@ public class PlayFragment extends BaseFragment implements
                         UpScoreBean downScoreBean = (UpScoreBean) msg.obj;
                         if (downScoreBean == null) return;
                         int error = downScoreBean.getStatus();
+                        mBtnDown.setEnabled(true);
+                        mBtnOn.setEnabled(true);
                         if (error == 1) {
                             interval = downScoreBean.getData().getBetRecord().getIntegral();
                             int gold = downScoreBean.getData().getUser().getUGold();
@@ -1010,6 +1013,7 @@ public class PlayFragment extends BaseFragment implements
                     startAnimBrand();
                 }
                 mBtnOn.setEnabled(false);
+                mBtnDown.setEnabled(false);
                 mBtnBegain.setEnabled(false);
                 PlayGameNetWorkUtil.getData(getActivity(), Constans.UPODOWN, new FormBody.Builder().add("type", "1").build(),
                         UpScoreBean.class, handler, 1);
@@ -1021,7 +1025,10 @@ public class PlayFragment extends BaseFragment implements
                     getBigorSmall("0");
                     return;
                 }
+                mBtnOn.setEnabled(false);
+                mBtnDown.setEnabled(false);
                 if(interval<100){
+                    mBtnOn.setEnabled(true);
                     ToastUtil.toast(getContext(),"分数不足100无法下分！");
                     return;
                 }

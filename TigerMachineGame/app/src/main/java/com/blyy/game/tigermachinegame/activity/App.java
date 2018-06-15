@@ -74,6 +74,9 @@ public class App extends Application{
         }
     }
     public void showTipsDialog(Activity activity){
+        if(tipsDialog!=null&&tipsDialog.isShowing()){
+            return;
+        }
         tipsDialog = new RegistDialog(activity);
         tipsDialog.show();
         Window window = tipsDialog.getWindow() ;

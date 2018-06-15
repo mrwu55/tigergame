@@ -65,7 +65,8 @@ public class FragmentActivity extends android.support.v4.app.FragmentActivity
         public void handleMessage(Message msg) {
             switch (msg.what) {
                 case 1:
-                    PlayGameNetWorkUtil.getData(FragmentActivity.this, Constans.GET_LUCKY, new FormBody.Builder().build(),
+                    PlayGameNetWorkUtil.getDataLucky(FragmentActivity.this,
+                            Constans.GET_LUCKY, new FormBody.Builder().build(),
                             LuckyBean.class, mHanlder, 3);
                     break;
                 case 2:
@@ -217,7 +218,7 @@ public class FragmentActivity extends android.support.v4.app.FragmentActivity
                     transaction.hide(loginFragment);
                     houseFragment = HouseFragment.newInstance(bundle);
                     transaction.add(R.id.fragment_base_frame, houseFragment);
-                     PlayGameNetWorkUtil.getData(this, Constans.GET_LUCKY, new FormBody.Builder().build(),
+                     PlayGameNetWorkUtil.getDataLucky(this, Constans.GET_LUCKY, new FormBody.Builder().build(),
                          LuckyBean.class, mHanlder, 3);
                 break;
             case 2:
@@ -246,7 +247,6 @@ public class FragmentActivity extends android.support.v4.app.FragmentActivity
         transaction = mFragmentManager.beginTransaction();
     switch (position){
         case 0:
-            Log.e("backFragment 0","走了");
             isFirst = true;
             tips = "";
             lucky_tips = "";

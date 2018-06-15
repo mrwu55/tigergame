@@ -73,4 +73,33 @@ public class PlayGameNetWorkUtil {
             }
         });
     }
+    public static <T> void getDataLucky(final Activity activity, String url, RequestBody requestBody,
+                                   final Class<T> tClass, final Handler handler, final int handlerCode){
+        OkHttpClient client = new OkHttpClient();
+        Request request = new Request.Builder()
+                .url(url)
+                .addHeader("Content-Type","application/x-www-form-urlencoded; charset=utf-8")
+                .post(requestBody)
+                .build();
+        Call call =client.newCall(request);
+        call.enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                App.getApp().dissmissDialog();
+                String msg = response.body().string();
+                Constans.showLogCompletion(msg,3000);
+                System.out.println(msg);
+                if(response.isSuccessful()){
+                    Message message = new Message();
+                    message.what = handlerCode;
+                    message.obj = JsonUtil.getJsonBean(tClass,msg);
+                    handler.sendMessage(message);
+                }
+            }
+        });
+    }
 }
