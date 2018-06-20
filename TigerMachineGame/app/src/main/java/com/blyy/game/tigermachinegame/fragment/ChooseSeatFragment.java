@@ -22,6 +22,7 @@ import com.blyy.game.tigermachinegame.bean.PlayBean;
 import com.blyy.game.tigermachinegame.bean.RoomSeatBean;
 import com.blyy.game.tigermachinegame.util.OkHttpUtils;
 import com.blyy.game.tigermachinegame.util.ToastUtil;
+import com.blyy.game.tigermachinegame.view.CountdownTextView;
 import com.blyy.game.tigermachinegame.view.RegistDialog;
 
 import java.util.ArrayList;
@@ -34,7 +35,7 @@ import okhttp3.FormBody;
  */
 
 public class ChooseSeatFragment extends BaseFragment implements
-        AdapterView.OnItemClickListener,View.OnClickListener{
+        AdapterView.OnItemClickListener,View.OnClickListener,CountdownTextView.OnTimeClearListner{
     private GridView mGridView;
     private Button mBtnBack;
     private TextView mTvRoom,mTvName,mTvMoney;
@@ -42,7 +43,6 @@ public class ChooseSeatFragment extends BaseFragment implements
     private HouseAdapter adapter;
     private List<RoomSeatBean.DataBean.MachineListBean> data;
     private String rtId = null;
-    private boolean isStop = false;
     private String gameStatus;
     private boolean isClick = false;
     @SuppressLint("HandlerLeak")
@@ -52,7 +52,6 @@ public class ChooseSeatFragment extends BaseFragment implements
             super.handleMessage(msg);
             switch (msg.what) {
                 case 0://请求所有座位
-                    isStop = false;
                     RoomSeatBean roomSeatBean = (RoomSeatBean) msg.obj;
                     if (roomSeatBean == null) return;
                     int status = roomSeatBean.getStatus();
@@ -104,6 +103,9 @@ public class ChooseSeatFragment extends BaseFragment implements
                         }
                     }
                     break;
+                case 404://网络错误
+                    isClick = false;
+                    break;
             }
         }
     };
@@ -144,7 +146,7 @@ public class ChooseSeatFragment extends BaseFragment implements
         }
         mBtnBack.setOnClickListener(this);
         mGridView = (GridView) view.findViewById(R.id.house_gridView);
-        adapter = new HouseAdapter(new ArrayList<RoomSeatBean.DataBean.MachineListBean>());
+        adapter = new HouseAdapter(new ArrayList<RoomSeatBean.DataBean.MachineListBean>(),this);
         mGridView.setAdapter(adapter);
         mGridView.setOnItemClickListener(this);
         if(rtId!=null) {
@@ -220,5 +222,12 @@ public class ChooseSeatFragment extends BaseFragment implements
         WindowManager.LayoutParams params = window.getAttributes() ;
         params.width = display.getWidth();                     //使用这种方式更改了dialog的框宽
         window.setAttributes(params);
+    }
+
+    @Override
+    public void onTimeClear() {//留机时间为0时回调
+        ToastUtil.toast(getContext(),"来了0");
+        OkHttpUtils.getData(getActivity(), Constans.GETSEAT, new FormBody.Builder().
+                add("rtId", rtId).build(), RoomSeatBean.class, handler, 0);
     }
 }

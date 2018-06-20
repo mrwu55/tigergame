@@ -171,19 +171,14 @@ public class PlayFragment extends BaseFragment implements
                                 return;
                             }
                             isFirstBegain = true;
-                            mBtnBegain.setEnabled(true);
-                            mBtnKeepMachine.setEnabled(true);
-                            mBtnOn.setEnabled(true);
-                            mBtnDown.setEnabled(true);
-                            mBtnAddBet.setEnabled(true);
+                            setBtnEnaBled(true);
                         }
                         break;
                     case 1://上分
                         UpScoreBean upScoreBean = (UpScoreBean) msg.obj;
                         if (upScoreBean == null) return;
                         int status = upScoreBean.getStatus();
-                        mBtnOn.setEnabled(true);
-                        mBtnBegain.setEnabled(true);
+                        setBtnEnaBled(true);
                         if (status == 1) {
                             interval = upScoreBean.getData().getBetRecord().getIntegral();
                             int gold = upScoreBean.getData().getUser().getUGold();
@@ -194,7 +189,6 @@ public class PlayFragment extends BaseFragment implements
                             }
                             mTvCredit.setText(interval-bets + "");
                             mTvMachineGold.setText("金币：" + gold);
-                            mBtnDown.setEnabled(true);
                         } else {
                             String errorMessage = upScoreBean.getMsg() == null ? "上分失败！" : upScoreBean.getMsg();
                             Toast.makeText(getContext(), errorMessage, Toast.LENGTH_SHORT).show();
@@ -255,8 +249,7 @@ public class PlayFragment extends BaseFragment implements
                         UpScoreBean downScoreBean = (UpScoreBean) msg.obj;
                         if (downScoreBean == null) return;
                         int error = downScoreBean.getStatus();
-                        mBtnDown.setEnabled(true);
-                        mBtnOn.setEnabled(true);
+                        setBtnEnaBled(true);
                         if (error == 1) {
                             interval = downScoreBean.getData().getBetRecord().getIntegral();
                             int gold = downScoreBean.getData().getUser().getUGold();
@@ -507,6 +500,7 @@ public class PlayFragment extends BaseFragment implements
                         playAdapter.setBet(interval - deletteBet);
                         break;
                     case 12:
+                        setBtnEnaBled(true);
                         mTvCredit.setText(deletteBet + "");
                         int addScores = interval - deletteBet;
                         mTvBet.setText(addScores+ "");
@@ -534,6 +528,7 @@ public class PlayFragment extends BaseFragment implements
                         mTvHold.setTextColor(colorChange);
                         break;
                     case 16://押分长按大于500
+                        setBtnEnaBled(true);
                         mBtnAddBet.setEnabled(false);
                          ToastUtil.toast(getContext(),"上分数不能大于500!");
                         break;
@@ -574,9 +569,8 @@ public class PlayFragment extends BaseFragment implements
                     case 617://网络错误
                         int typeCode = msg.arg1;
                         switch (typeCode){
-                            case 1:
-                                mBtnOn.setEnabled(true);
-                                mBtnBegain.setEnabled(true);
+                            case 1://上分
+                                setBtnEnaBled(true);
                                 break;
                             case 2://比倍接口
                                 mBtnAddBet.setEnabled(true);
@@ -594,13 +588,12 @@ public class PlayFragment extends BaseFragment implements
                                 }
                                 mBtnAddBet.setEnabled(true);
                                 break;
+                            case 3://下分
+                                setBtnEnaBled(true);
+                                break;
                             case 0://开始游戏第一次接口
                                 isFirstBegain = true;
-                                mBtnBegain.setEnabled(true);
-                                mBtnKeepMachine.setEnabled(true);
-                                mBtnOn.setEnabled(true);
-                                mBtnDown.setEnabled(true);
-                                mBtnAddBet.setEnabled(true);
+                                setBtnEnaBled(true);
                                 break;
                             case 4:
                                 mBtnBegain.setEnabled(true);
@@ -943,7 +936,6 @@ public class PlayFragment extends BaseFragment implements
         super.onResume();
         if (isFirstLogin) return;
         gifStart.setBackgroundResource(R.drawable.start_gif);
-//        App.getApp().getMediaPlayer().start();
         App.getApp().playInit();
     }
     @Override
@@ -970,7 +962,6 @@ public class PlayFragment extends BaseFragment implements
                             ThanTimeBean.class, handler, 2);
                     return;
                 }
-
                 soundPool.play(soundAdd, 1.0f, 1.0f, 999, 0, 1);
                 int credit = Integer.parseInt(mTvCredit.getText().toString());
                 int betsAdd = Integer.parseInt(mTvBet.getText().toString());
@@ -1012,9 +1003,7 @@ public class PlayFragment extends BaseFragment implements
                     isFirstLogin = true;
                     startAnimBrand();
                 }
-                mBtnOn.setEnabled(false);
-                mBtnDown.setEnabled(false);
-                mBtnBegain.setEnabled(false);
+                setBtnEnaBled(false);
                 PlayGameNetWorkUtil.getData(getActivity(), Constans.UPODOWN, new FormBody.Builder().add("type", "1").build(),
                         UpScoreBean.class, handler, 1);
                 break;
@@ -1025,10 +1014,10 @@ public class PlayFragment extends BaseFragment implements
                     getBigorSmall("0");
                     return;
                 }
-                mBtnOn.setEnabled(false);
-                mBtnDown.setEnabled(false);
+                setBtnEnaBled(false);
                 if(interval<100){
                     mBtnOn.setEnabled(true);
+                    mBtnKeepMachine.setEnabled(true);
                     ToastUtil.toast(getContext(),"分数不足100无法下分！");
                     return;
                 }
@@ -1038,10 +1027,7 @@ public class PlayFragment extends BaseFragment implements
             case R.id.btn_a_begain://开始
                 if(isCompare){//得分
                     soundPool.autoPause();
-                    mBtnAddBet.setEnabled(false);
-                    mBtnOn.setEnabled(false);
-                    mBtnDown.setEnabled(false);
-                    mBtnBegain.setEnabled(false);
+                    setBtnEnaBled(false);
                     PlayGameNetWorkUtil.getData(getActivity(), Constans.GETSCORE, new FormBody.Builder().build(),
                             EndBean.class, handler, 6);
                     return;
@@ -1061,11 +1047,7 @@ public class PlayFragment extends BaseFragment implements
                         mTvCredit.setText(interval-bets+"");
                         mTvBet.setText(bets+"");
                     }
-                    mBtnBegain.setEnabled(false);
-                    mBtnKeepMachine.setEnabled(false);
-                    mBtnOn.setEnabled(false);
-                    mBtnDown.setEnabled(false);
-                    mBtnAddBet.setEnabled(false);
+                    setBtnEnaBled(false);
                     if(isFirstLogin){
                         startGame();
                         return;
@@ -1145,6 +1127,13 @@ public class PlayFragment extends BaseFragment implements
                 showFragment(bundle,4);
                 break;
         }
+    }
+    private void setBtnEnaBled(boolean flag){
+        mBtnBegain.setEnabled(flag);
+        mBtnKeepMachine.setEnabled(flag);
+        mBtnOn.setEnabled(flag);
+        mBtnDown.setEnabled(flag);
+        mBtnAddBet.setEnabled(flag);
     }
     private void startAnimBrand(){
         Animation animation = new TranslateAnimation(-1000, Animation.RELATIVE_TO_SELF, 0, 0);
@@ -1252,6 +1241,10 @@ public class PlayFragment extends BaseFragment implements
     @Override
     public boolean onLongClick(View v) {
         OnClick = true;
+        mBtnBegain.setEnabled(false);
+        mBtnKeepMachine.setEnabled(false);
+        mBtnOn.setEnabled(false);
+        mBtnDown.setEnabled(false);
         getAllId = soundPool.play(soundBsGetAll, 1.0f, 1.0f, 999, -1, 1);
         Thread t = new Thread(new Runnable() {
             @Override
@@ -1297,6 +1290,7 @@ public class PlayFragment extends BaseFragment implements
                 if(OnClick){
                     OnClick = false;
                     soundPool.stop(getAllId);
+                    setBtnEnaBled(true);
                 }
             }
         }
@@ -1365,7 +1359,7 @@ public class PlayFragment extends BaseFragment implements
         Button buttonSure = (Button) window.findViewById(R.id.btn_exit_sure);
         Button buttonCancel = (Button) window.findViewById(R.id.btn_exit_cancel);
         TextView textView = (TextView) window.findViewById(R.id.tv_join_title);
-        textView.setText("如果退出机子上的剩余分数将清零!");
+        textView.setText("退出后，机子上分不会自动返还，是否确定退出?");
         buttonSure.setOnClickListener(this);
         buttonCancel.setOnClickListener(this);
         Display display =getActivity().getWindowManager().getDefaultDisplay();

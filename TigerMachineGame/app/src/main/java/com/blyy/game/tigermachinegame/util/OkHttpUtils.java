@@ -39,6 +39,7 @@ public class OkHttpUtils {
         call.enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
+                handler.sendEmptyMessage(404);
               activity.runOnUiThread(new Runnable() {
                   @Override
                   public void run() {

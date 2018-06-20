@@ -19,7 +19,7 @@ import java.util.TimerTask;
 
 @SuppressLint("AppCompatCustomView")
 public class CountdownTextView extends TextView{
-
+    private OnTimeClearListner onTimeClearListner;
     long mSeconds;
     String mStrFormat;
     Map<Integer,Timer> mTimerMap;
@@ -47,7 +47,8 @@ public class CountdownTextView extends TextView{
      * @param format  例如：剩余%s
      * @param seconds
      */
-    public void init(String format,long seconds){
+    public void init(String format,long seconds,OnTimeClearListner onTimeClearListner){
+        this.onTimeClearListner = onTimeClearListner;
         mTimerMap = new HashMap<>();
         if(!TextUtils.isEmpty(format)){
             mStrFormat = format;
@@ -82,9 +83,9 @@ public class CountdownTextView extends TextView{
             switch (msg.what){
                 case what_count_down_tick:
                     if(mSeconds <= 0){
+                        onTimeClearListner.onTimeClear();
                         setText(String.format(mStrFormat,"00:00:00"));
                     }else {
-//                        Log.e(TAG,"mSeconds="+mSeconds+"#what_count_down_tick:"+second2TimeSecond(mSeconds)+"#"+String.format(mStrFormat,second2TimeSecond(mSeconds)));
                         setText(mStrFormat== null ?second2TimeSecond(mSeconds):String.format(mStrFormat,second2TimeSecond(mSeconds)));
                     }
                     break;
@@ -151,5 +152,8 @@ public class CountdownTextView extends TextView{
             secondString = String.valueOf(seconds);
         }
         return hourString + ":" + minuteString+":"+secondString;
+    }
+    public interface OnTimeClearListner{
+        void onTimeClear();
     }
 }

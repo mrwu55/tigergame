@@ -19,9 +19,11 @@ import java.util.List;
  * on 2018/2/8.
  */
 public class HouseAdapter extends BaseAdapter{
-    List<RoomSeatBean.DataBean.MachineListBean> data;
-    public HouseAdapter(ArrayList<RoomSeatBean.DataBean.MachineListBean> data) {
+    private CountdownTextView.OnTimeClearListner onTimeClearListner;
+    private List<RoomSeatBean.DataBean.MachineListBean> data;
+    public HouseAdapter(ArrayList<RoomSeatBean.DataBean.MachineListBean> data,CountdownTextView.OnTimeClearListner onTimeClearListner) {
         this.data = data;
+        this.onTimeClearListner = onTimeClearListner;
     }
     @Override
     public int getCount() {
@@ -69,7 +71,7 @@ public class HouseAdapter extends BaseAdapter{
             viewHolder.mImgSeat.setBackgroundResource(R.mipmap.seat_girl);
             viewHolder.mTvTime.setVisibility(View.VISIBLE);
             long time = machineListBean.getMachineOfUserVo().getKeepTime();
-            viewHolder.mTvTime.init(null,time);
+            viewHolder.mTvTime.init(null,time,onTimeClearListner);
             viewHolder.mTvTime.start(i);
             viewHolder.mTvName.setVisibility(View.VISIBLE);
             String name = machineListBean.getMachineOfUserVo().getUName();
