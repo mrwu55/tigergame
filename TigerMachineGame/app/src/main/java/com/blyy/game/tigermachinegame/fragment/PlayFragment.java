@@ -22,7 +22,6 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.blyy.game.tigermachinegame.Constans;
 import com.blyy.game.tigermachinegame.R;
@@ -165,7 +164,7 @@ public class PlayFragment extends BaseFragment implements
                             }
                         } else {
                             String errorMessage = startBean.getMsg() == null ? "数据错误！" : startBean.getMsg();
-                            Toast.makeText(getContext(), errorMessage, Toast.LENGTH_SHORT).show();
+                            ToastUtil.toast(getContext(), errorMessage);
                             if(code==3){
                                 setBackPosition(0);
                                 return;
@@ -191,7 +190,7 @@ public class PlayFragment extends BaseFragment implements
                             mTvMachineGold.setText("金币：" + gold);
                         } else {
                             String errorMessage = upScoreBean.getMsg() == null ? "上分失败！" : upScoreBean.getMsg();
-                            Toast.makeText(getContext(), errorMessage, Toast.LENGTH_SHORT).show();
+                            ToastUtil.toast(getContext(), errorMessage);
                             if(status==3){
                                 setBackPosition(0);
                             }
@@ -239,7 +238,7 @@ public class PlayFragment extends BaseFragment implements
                         }else {
                             mBtnAddBet.setEnabled(true);
                             mBtnBegain.setEnabled(true);
-                            Toast.makeText(getContext(), thanTimeBean.getMsg(), Toast.LENGTH_SHORT).show();
+                            ToastUtil.toast(getContext(), thanTimeBean.getMsg());
                             if(thantimesCode==3){
                                 setBackPosition(0);
                             }
@@ -507,7 +506,7 @@ public class PlayFragment extends BaseFragment implements
                         playAdapter.setBet(addScores==0?1:addScores);
                         ToastUtil.toast(getContext(),"分数不足,清先上分！");
                         break;
-                    case 13:
+                    case 13://得分
                         mTvCredit.setText(interval + "");
                         if(isDouble){
                             clearScore(getIntegral--);
@@ -560,6 +559,7 @@ public class PlayFragment extends BaseFragment implements
                         getResetScore();
                         break;
                     case 21://中大奖加分
+                        mTvCredit.setText(interval + "");
                         mTvClearScore.setText(clearScore<=0?"0":clearScore--+"");
                         mTvClearA.setText(clearAScore<=0?"0":clearAScore--+"");
                         mTvClearB.setText(clearBScore<=0?"0":clearBScore--+"");

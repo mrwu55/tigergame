@@ -36,7 +36,7 @@ import com.blyy.game.tigermachinegame.view.RegistDialog;
 import okhttp3.FormBody;
 
 public class HouseFragment extends BaseFragment implements View.OnClickListener{
-    private RegistDialog registDialog,tipsDialog,exitDialog,helpDialog;
+    private RegistDialog registDialog,tipsDialog,exitDialog;
     private EditText mEditoldPss,mEditnewPss,mEditSurePss;
     private CheckBox mCheckBox;
     private boolean ischeck;
@@ -282,9 +282,7 @@ public class HouseFragment extends BaseFragment implements View.OnClickListener{
             case R.id.btn_exit_cancel:
                 exitDialog.dismiss();
                 break;
-            case R.id.img_help_close:
-                helpDialog.dismiss();
-                break;
+
         }
     }
 }

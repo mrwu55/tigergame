@@ -9,7 +9,6 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.animation.Animation;
@@ -251,6 +250,7 @@ public class FragmentActivity extends android.support.v4.app.FragmentActivity
             tips = "";
             lucky_tips = "";
             Constans.Session = null;
+            Constans.gold = null;
             if(task!=null){
                 mHanlder.removeCallbacks(task);
             }
@@ -258,33 +258,25 @@ public class FragmentActivity extends android.support.v4.app.FragmentActivity
                 mHanlder.removeCallbacks(sysTask);
             }
             if(recordFragment!=null){
-                transaction.remove(recordFragment).remove(playFragment).remove(chooseSeatFragment).remove(houseFragment);
+                transaction.remove(recordFragment).
+                        remove(playFragment).
+                        remove(chooseSeatFragment);
                 recordFragment = null;
                 playFragment = null;
                 chooseSeatFragment = null;
-                houseFragment = null;
-                transaction.show(loginFragment).commitAllowingStateLoss();
-                return;
             }
             if(playFragment!=null){
-                transaction.remove(playFragment).remove(chooseSeatFragment).remove(houseFragment);
+                transaction.remove(playFragment).remove(chooseSeatFragment);
                 playFragment = null;
                 chooseSeatFragment = null;
-                houseFragment = null;
-                transaction.show(loginFragment).commitAllowingStateLoss();
-                return;
             }
             if(chooseSeatFragment!=null){
-                transaction.remove(chooseSeatFragment).remove(houseFragment);
+                transaction.remove(chooseSeatFragment);
                 chooseSeatFragment = null;
-                houseFragment = null;
-                transaction.show(loginFragment).commitAllowingStateLoss();
-                return;
             }
                 transaction.remove(houseFragment);
                 houseFragment = null;
                 transaction.show(loginFragment).commitAllowingStateLoss();
-                mHanlder.removeCallbacks(task);
             break;
         case 2:
             transaction.remove(chooseSeatFragment).show(houseFragment).commitAllowingStateLoss();
@@ -303,7 +295,6 @@ public class FragmentActivity extends android.support.v4.app.FragmentActivity
     @Override
     protected void onResume() {
         sm.registerListener(listener, sensor, SensorManager.SENSOR_DELAY_UI);
-        Log.e("onResume","onResume");
         super.onResume();
     }
     @Override

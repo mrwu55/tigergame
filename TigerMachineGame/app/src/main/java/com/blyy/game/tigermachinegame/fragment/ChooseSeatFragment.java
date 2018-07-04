@@ -13,7 +13,6 @@ import android.widget.Button;
 import android.widget.GridView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
 import com.blyy.game.tigermachinegame.Constans;
 import com.blyy.game.tigermachinegame.R;
 import com.blyy.game.tigermachinegame.activity.App;
@@ -35,7 +34,8 @@ import okhttp3.FormBody;
  */
 
 public class ChooseSeatFragment extends BaseFragment implements
-        AdapterView.OnItemClickListener,View.OnClickListener,CountdownTextView.OnTimeClearListner{
+        AdapterView.OnItemClickListener,View.OnClickListener,
+        CountdownTextView.OnTimeClearListner{
     private GridView mGridView;
     private Button mBtnBack;
     private TextView mTvRoom,mTvName,mTvMoney;
@@ -226,7 +226,6 @@ public class ChooseSeatFragment extends BaseFragment implements
 
     @Override
     public void onTimeClear() {//留机时间为0时回调
-        ToastUtil.toast(getContext(),"来了0");
         OkHttpUtils.getData(getActivity(), Constans.GETSEAT, new FormBody.Builder().
                 add("rtId", rtId).build(), RoomSeatBean.class, handler, 0);
     }

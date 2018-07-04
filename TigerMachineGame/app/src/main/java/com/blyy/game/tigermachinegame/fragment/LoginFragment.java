@@ -59,8 +59,8 @@ public class LoginFragment extends BaseFragment implements View.OnClickListener 
                     RegistBean registBean = (RegistBean) msg.obj;
                     if(registBean ==null)return;
                     int statuCode = registBean.getStatus();
-                    registDialog.dismiss();
                     if(statuCode==1) {
+                        registDialog.dismiss();
                         ToastUtil.toast(getContext(),registBean.getMsg());
                     }else {
                         String error = registBean.getMsg();

@@ -49,7 +49,6 @@ public abstract class BaseFragment extends Fragment implements FragmentBackHandl
 
     @Override
     public void onDestroy() {
-        Log.e("fragmentDestroy","onDestroy");
         super.onDestroy();
     }
 }
