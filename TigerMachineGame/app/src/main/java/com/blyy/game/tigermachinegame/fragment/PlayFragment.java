@@ -313,8 +313,7 @@ public class PlayFragment extends BaseFragment implements
                             mTvNumC.setText(numC);
                             mTvNumD.setText(numD);
                             if(dataStatus==1){
-                                getIntegral = resultBean.getData().getBetRecord().getGetIntegral();
-                                betIntegral = resultBean.getData().getBetRecord().getGetIntegral();
+                                betIntegral= getIntegral = resultBean.getData().getBetRecord().getGetIntegral();
                                 bigTitle =resultBean.getData().getBetRecord().getCbn();
                                 switch (bigTitle){
                                     case "5.K":
