@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.blyy.game.tigermachinegame.activity.FragmentActivity">
+    tools:context="com.longfeng.panda.activity.FragmentActivity">
     <FrameLayout
         android:id="@+id/fragment_base_frame"
         android:layout_width="match_parent"

@@ -37,7 +37,7 @@
             android:maxLength="8"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
-        <com.blyy.game.tigermachinegame.view.CountdownTextView
+        <com.longfeng.panda.view.CountdownTextView
             android:id="@+id/tv_house_time"
             android:textSize="14dp"
             android:textColor="@color/ffff47"
