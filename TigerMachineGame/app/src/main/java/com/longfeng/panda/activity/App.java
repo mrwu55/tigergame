@@ -23,6 +23,8 @@ import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.Map;
 
+import static com.tencent.bugly.beta.tinker.TinkerManager.getApplication;
+
 /**
  * Created by WuJingCheng
  * on 2018/2/9.
@@ -84,7 +86,7 @@ public class App extends Application{
         RelativeLayout relayout = (RelativeLayout) window.findViewById(R.id.re_home_tips);
         TextView textView  = (TextView) window.findViewById(R.id.tv_tipdialog_tip);
         ImageView mImgClose = (ImageView) window.findViewById(R.id.img_tips_close);
-        textView.setText("网络连接错误，请检查网络设置!");
+        textView.setT ext("网络连接错误，请检查网络设置!");
         mImgClose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

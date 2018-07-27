@@ -1,5 +1,6 @@
 package com.longfeng.panda.view;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.util.AttributeSet;
@@ -12,6 +13,7 @@ import android.widget.SeekBar;
  * Created by WuJingCheng
  * on 2018/2/8.
  */
+@SuppressLint("AppCompatCustomView")
 public class VerticalSeekBar extends SeekBar{
     private boolean mIsDragging;
     private float mTouchDownY;

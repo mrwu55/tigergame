@@ -16,7 +16,7 @@ import android.view.animation.LinearInterpolator;
 import android.view.animation.TranslateAnimation;
 import android.widget.HorizontalScrollView;
 import android.widget.TextView;
-
+import android.util.Log;
 import com.longfeng.panda.Constans;
 import com.longfeng.panda.R;
 import com.longfeng.panda.bean.LuckyBean;
@@ -309,6 +309,7 @@ public class FragmentActivity extends android.support.v4.app.FragmentActivity
     @Override
     protected void onDestroy() {
         mHanlder.removeCallbacks(task);
+        Log.e("OndesDroy","走了");
         super.onDestroy();
     }
 }
